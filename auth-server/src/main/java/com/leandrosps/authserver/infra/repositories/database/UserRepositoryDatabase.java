@@ -1,5 +1,7 @@
 package com.leandrosps.authserver.infra.repositories.database;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -20,11 +22,11 @@ public class UserRepositoryDatabase implements UserRepository {
     }
 
     @Override
-    public User getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         var userData = this.userJPARepository.findByEmail(email);
 
         if (userData == null) {
-            throw new CustomError("User not found!");
+            return Optional.empty();
         }
 
         var user = User.create(
@@ -38,7 +40,7 @@ public class UserRepositoryDatabase implements UserRepository {
             user.addRole(userData.getRoles().get(i).getName());
         }
 
-        return user;
+        return Optional.of(user);
     }
 
 }

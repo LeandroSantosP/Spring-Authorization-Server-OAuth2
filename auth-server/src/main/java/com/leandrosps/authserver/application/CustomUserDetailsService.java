@@ -2,6 +2,7 @@ package com.leandrosps.authserver.application;
 
 import com.leandrosps.authserver.infra.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,7 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        var user = this.userRepository.getByEmail(email);
+        var userOp = this.userRepository.getByEmail(email);
+        if (userOp.isEmpty()) {
+            throw new BadCredentialsException("Bad Credentials");
+        }
+        var user = userOp.get();
         return new User(
                 user.getEmail(),
                 user.getPassword(),

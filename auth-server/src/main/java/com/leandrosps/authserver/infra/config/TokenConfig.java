@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 
+import com.leandrosps.authserver.infra.exceptions.CustomError;
 import com.leandrosps.authserver.infra.repositories.UserRepository;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -57,10 +58,15 @@ public class TokenConfig {
                 for (GrantedAuthority authorities : userData.getAuthorities()) {
                     authoritis.add(authorities.getAuthority());
                 }
-                final var user = userRepository.getByEmail(userData.getUsername());
+                final var userOp = userRepository.getByEmail(userData.getUsername());
+                if (userOp.isEmpty()) {
+                    throw new CustomError("User not found");
+                }
+                var user = userOp.get();
                 context.getClaims().claim("user_id", user.getId());
                 context.getClaims().claim("user_username", user.getUsername());
                 context.getClaims().claim("authorities", authoritis);
+
             }
         });
     }

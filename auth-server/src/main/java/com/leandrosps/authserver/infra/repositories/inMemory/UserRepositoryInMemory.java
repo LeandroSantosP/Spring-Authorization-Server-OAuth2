@@ -7,10 +7,10 @@ import com.leandrosps.authserver.infra.repositories.UserRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Primary
 public class UserRepositoryInMemory implements UserRepository {
@@ -30,13 +30,13 @@ public class UserRepositoryInMemory implements UserRepository {
     }
 
     @Override
-    public User getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         for (User user : users) {
             if (user.getEmail().equals(email)) {
-                return user;
+                return Optional.of(user);
             }
         }
-        throw new BadCredentialsException("User not found");
+        return Optional.empty();
     }
 
 }

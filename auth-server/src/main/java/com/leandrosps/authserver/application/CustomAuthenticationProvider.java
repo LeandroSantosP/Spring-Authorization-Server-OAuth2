@@ -28,12 +28,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     private Authentication checkPassword(UserDetails user, String rawPassword) {
-
         if (passwordEncoder.matches(rawPassword, user.getPassword())) {
-            System.out.println("AUTH BEFORE: " + new UsernamePasswordAuthenticationToken(
-                    user,
-                    user.getPassword(),
-                    user.getAuthorities()));
             return new UsernamePasswordAuthenticationToken(
                     user,
                     user.getPassword(),
