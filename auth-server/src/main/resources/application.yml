@@ -1,0 +1,22 @@
+server:
+  port: 9000
+
+aw:
+  auth:
+    provider-uri: "http://localhost:9000"
+    jks:
+      keypass: 123456
+      storepass: 123456
+      alias: awblog
+      path: keystore/awblog.jks
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: clientserver
+    password: clientserverpass
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true

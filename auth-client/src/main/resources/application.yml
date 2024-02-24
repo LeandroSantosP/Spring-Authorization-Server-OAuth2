@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          client-server-oidc:
+            provider: spring
+            client-id: client-server
+            client-secret: "secret"
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8080/login/oauth2/code/client-server-oidc"
+            scope: openid, profile
+            client-name: client-server-oid
+        github:
+          client-id: 5ae636b2e1ae5e7597de
+          client-secret: e3e5a31f427468d1ea517c5597004438b7841c30
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
