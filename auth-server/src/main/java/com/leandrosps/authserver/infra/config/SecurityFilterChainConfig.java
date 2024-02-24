@@ -2,6 +2,7 @@ package com.leandrosps.authserver.infra.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -19,7 +20,7 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 public class SecurityFilterChainConfig {
 
         @Bean
-        @Order(1)
+        @Order(Ordered.HIGHEST_PRECEDENCE)
         SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
                 OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 

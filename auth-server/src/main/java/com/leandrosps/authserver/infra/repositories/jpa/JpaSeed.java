@@ -23,8 +23,8 @@ public class JpaSeed {
 
     @Bean
     public Object createDefaultRoles(PasswordEncoder passwordEncoder) {
-        roleJPARepository.save(new Role(UUID.randomUUID().toString(), "ADMIN", Collections.emptyList()));
-        var role = roleJPARepository.save(new Role(UUID.randomUUID().toString(), "USER", Collections.emptyList()));
+        var role = roleJPARepository.save(new Role(UUID.randomUUID().toString(), "ADMIN", Collections.emptyList()));
+        roleJPARepository.save(new Role(UUID.randomUUID().toString(), "USER", Collections.emptyList()));
 
         userJPARepository.save(new User(
                 UUID.randomUUID().toString(),
