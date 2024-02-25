@@ -50,7 +50,6 @@ public class TokenConfig {
     public OAuth2TokenCustomizer<JwtEncodingContext> jwtEncodedConstomize(UserRepository userRepository) {
         return (context -> {
             Authentication authentication = context.getPrincipal();
-            System.out.println("AUTH AFTER: " + authentication.getPrincipal());
             if (authentication.getPrincipal() instanceof User) {
                 final User userData = (User) authentication.getPrincipal();
                 Set<String> authoritis = new HashSet<>();
@@ -66,7 +65,6 @@ public class TokenConfig {
                 context.getClaims().claim("user_id", user.getId());
                 context.getClaims().claim("user_username", user.getUsername());
                 context.getClaims().claim("authorities", authoritis);
-
             }
         });
     }

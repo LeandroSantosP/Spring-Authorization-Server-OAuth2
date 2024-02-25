@@ -9,6 +9,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasRole('ADMIN') or hasAuthority('SCOPE_users:read')")
-public @interface CanReadUsers {
+@PreAuthorize("hasAuthority('SCOPE_users:write')")
+public @interface CanWriteUsersServer {
 }

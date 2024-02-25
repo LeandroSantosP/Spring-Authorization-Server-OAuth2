@@ -10,5 +10,4 @@ public class UserController {
     public String getMethodName() {
         return new String();
     }
-
 }

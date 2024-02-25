@@ -19,9 +19,20 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-
   security:
     oauth2:
+      client:
+        registration:
+          auth-server:
+            provider: spring
+            client-id: client-server-back
+            client-secret: secret
+            client-authentication-method: client_credentials
+            scope: users:read
+            client-name: auth-server
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
       resourceserver:
         jwt:
           issuer-uri: http://localhost:9000

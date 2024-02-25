@@ -1,12 +1,10 @@
 package com.leandrosps.authserver.infra.repositories.database;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import com.leandrosps.authserver.domain.User;
-import com.leandrosps.authserver.infra.exceptions.CustomError;
 import com.leandrosps.authserver.infra.repositories.UserRepository;
 import com.leandrosps.authserver.infra.repositories.jpa.UserJPARepository;
 
